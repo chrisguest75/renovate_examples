@@ -5,6 +5,16 @@
     "config:recommended",
     ":semanticCommits"
   ],
+  "enabledManagers": [
+    "github-actions",
+    "npm",
+    "dockerfile",
+    "devcontainer"
+  ],
+  "includePaths": [
+    "01_renovate_cli/**",
+    "examples/**"
+  ],
   "timezone": "UTC",
   "prHourlyLimit": 2,
   "prConcurrentLimit": 10,
