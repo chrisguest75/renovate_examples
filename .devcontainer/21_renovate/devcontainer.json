@@ -19,7 +19,8 @@
   "remoteUser": "vscode",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {},
-    "ghcr.io/devcontainers-extra/features/gh-cli:1": {}
+    "ghcr.io/devcontainers-extra/features/gh-cli:1": {},
+    "ghcr.io/guiyomh/features/just:0": {}
   },
   // Configure tool-specific properties.
   "customizations": {
