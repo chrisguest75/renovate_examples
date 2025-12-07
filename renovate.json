@@ -15,7 +15,12 @@
     "{{{manager}}}"
   ],
   "packageRules": [
-
+    {
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "pinDigests": true
+    }
   ],
   "customManagers": [
     {
