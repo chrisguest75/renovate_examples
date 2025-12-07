@@ -1,0 +1,118 @@
+name: Build DevContainer
+# Note: Old devcontainer images are automatically cleaned up by the cleanup-devcontainer-images.yaml workflow
+
+on:
+  push:
+    branches: 
+      - '*'      
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/build-devcontainer.yaml'
+
+  pull_request:
+    branches: 
+      - '*'
+      - '!main'   # excludes main
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/build-devcontainer.yaml'
+
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-devcontainer:
+    name: "Build DevContainer Image"
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Generate tags
+      id: tags
+      run: |
+        # Clean branch name for Docker tag (replace invalid characters)
+        BRANCH_NAME="${{ github.ref_name }}"
+        CLEAN_BRANCH=$(echo "$BRANCH_NAME" | sed 's/[^a-zA-Z0-9._-]/-/g')
+        SHORT_SHA="${{ github.sha }}"
+        SHORT_SHA=${SHORT_SHA:0:7}
+        
+        echo "branch-tag=ghcr.io/${{ github.repository }}/devcontainer:${CLEAN_BRANCH}" >> $GITHUB_OUTPUT
+        echo "sha-tag=ghcr.io/${{ github.repository }}/devcontainer:${CLEAN_BRANCH}-${SHORT_SHA}" >> $GITHUB_OUTPUT
+        echo "latest-tag=ghcr.io/${{ github.repository }}/devcontainer:latest" >> $GITHUB_OUTPUT
+        
+        # Debug output
+        echo "=== Debug Tag Generation ==="
+        echo "Original branch: ${{ github.ref_name }}"
+        echo "Clean branch: ${CLEAN_BRANCH}"
+        echo "Short SHA: ${SHORT_SHA}"
+        echo "Generated branch tag: ghcr.io/${{ github.repository }}/devcontainer:${CLEAN_BRANCH}"
+
+    - name: Copy devcontainer to root
+      run: |
+        # Copy the devcontainer config to the expected location
+        mkdir -p .devcontainer
+        cp -r .devcontainer/21_renovate_amd64/* .devcontainer/
+        ls -la .devcontainer/
+
+    - name: Build DevContainer with devcontainer CLI
+      uses: devcontainers/ci@v0.3
+      with:
+        push: never
+        cacheFrom: type=gha
+        cacheTo: type=gha,mode=max
+
+    - name: Tag and push DevContainer
+      run: |
+        # Get the image name that was built (devcontainer CLI creates images with specific patterns)
+        BUILT_IMAGE=$(docker images --format "{{.Repository}}:{{.Tag}}" | grep -v "ghcr.io" | grep "devcontainer" | head -1)
+        if [ -z "$BUILT_IMAGE" ]; then
+          # Fallback: look for any recent image
+          BUILT_IMAGE=$(docker images --format "{{.Repository}}:{{.Tag}}" | head -1)
+        fi
+        echo "Built image: $BUILT_IMAGE"
+        
+        # Tag and push our custom tags
+        docker tag "$BUILT_IMAGE" ${{ steps.tags.outputs.branch-tag }}
+        docker tag "$BUILT_IMAGE" ${{ steps.tags.outputs.sha-tag }}
+        
+        docker push ${{ steps.tags.outputs.branch-tag }}
+        docker push ${{ steps.tags.outputs.sha-tag }}
+        
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          docker tag "$BUILT_IMAGE" ${{ steps.tags.outputs.latest-tag }}
+          docker push ${{ steps.tags.outputs.latest-tag }}
+        fi
+
+    - name: Test DevContainer
+      run: |
+        echo "=== Testing DevContainer ==="
+        docker run --rm ${{ steps.tags.outputs.branch-tag }} bash -c "
+          node --version
+          npm --version
+          just --version
+          echo 'DevContainer build successful!'
+        "
+
+    - name: Output image tags
+      run: |
+        echo "Built and pushed DevContainer images:"
+        echo "Branch tag: ${{ steps.tags.outputs.branch-tag }}"
+        echo "SHA tag: ${{ steps.tags.outputs.sha-tag }}"
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          echo "Latest tag: ${{ steps.tags.outputs.latest-tag }}"
+        fi
