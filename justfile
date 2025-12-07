@@ -4,8 +4,6 @@
 
 set dotenv-load := true
 
-#export PROJECT_ID:="urbane-dev-01"
-
 # default lists actions
 default:
   @just -f {{ source_file() }} --list
@@ -19,7 +17,9 @@ scan:
 
   npx --yes renovate
 
+scan-local:  
+  #!/usr/bin/env bash
+  set -eufo pipefail
 
-
-
-
+  unset RENOVATE_REPOSITORIES
+  RENOVATE_PLATFORM=local npx --yes renovate

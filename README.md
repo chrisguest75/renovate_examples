@@ -14,15 +14,17 @@ Detect out-of-date components.
 
 ```sh
 # get the token on the host and copy it into devcontainer
+cp .env.template .env
+
+# fill the token value in
 export RENOVATE_TOKEN=$(gh auth token)
 echo "export RENOVATE_TOKEN=$(gh auth token)"
 
 # look at suggested upgrades
-LOG_LEVEL=debug RENOVATE_PLATFORM=local npx --yes renovate
+just scan-local
 
 # raise PR
-export RENOVATE_REPOSITORIES="chrisguest75/renovate_examples"
-LOG_LEVEL=debug npx --yes renovate
+just scan
 ```
 
 ## Resources
