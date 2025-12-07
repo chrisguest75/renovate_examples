@@ -20,7 +20,13 @@
   "features": {
     "ghcr.io/devcontainers/features/node:1": {},
     "ghcr.io/devcontainers-extra/features/gh-cli:1": {},
-    "ghcr.io/guiyomh/features/just:0": {}
+    "ghcr.io/guiyomh/features/just:0": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"version": "latest",
+			"enableNonRootDocker": "true",
+			"moby": "true",
+			"dockerDashComposeVersion": "v2"
+		}
   },
   // Configure tool-specific properties.
   "customizations": {

@@ -14,7 +14,6 @@ validate:
 
   npx --yes --package renovate -- renovate-config-validator --strict
 
-
 # ***************************************
 # scan
 # ***************************************
@@ -31,4 +30,15 @@ scan-local:
   unset RENOVATE_REPOSITORIES
   RENOVATE_PLATFORM=local npx --yes renovate
 
+# ***************************************
+# build
+# ***************************************
+
+build:  
+  #!/usr/bin/env bash
+  set -eufo pipefail
+
+  just -f ./projects/dockerfiles/justfile build 
+  just -f ./projects/typescript/01_test_node20/justfile build 
+  just -f ./projects/typescript/08_pino_logger/justfile build 
 
