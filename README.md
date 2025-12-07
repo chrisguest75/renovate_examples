@@ -6,3 +6,5 @@
 * https://github.com/marketplace/renovate
 * https://docs.renovatebot.com/getting-started/installing-onboarding/
 
+* https://github.com/renovatebot/renovate
+
