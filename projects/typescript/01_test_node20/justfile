@@ -45,6 +45,9 @@ watch:
 build: install
   #!/usr/bin/env bash
   set -eufo pipefail
+  
+  . ${NVM_DIR}/nvm.sh && nvm install
+  nvm use
 
   node --version
   #npm outdated
