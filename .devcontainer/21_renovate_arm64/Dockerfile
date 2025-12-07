@@ -1,7 +1,7 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.238.0/containers/ubuntu/.devcontainer/base.Dockerfile
 
 # [Choice] Ubuntu version (use ubuntu-22.04 or ubuntu-18.04 on local arm64/Apple Silicon): ubuntu-22.04, ubuntu-20.04, ubuntu-18.04
-ARG VARIANT="jammy"
+ARG VARIANT="jammy@sha256:658946bf6191bf0158739bfe3909acd8e8c3294ce5d1cd21a9aaf38134384339"
 FROM --platform=arm64 mcr.microsoft.com/devcontainers/base:${VARIANT}
 
 # [Optional] Uncomment this section to install additional OS packages.

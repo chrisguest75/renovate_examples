@@ -1,5 +1,5 @@
-# syntax=docker/dockerfile:1.4
-FROM node:20.11.1-bullseye AS BUILDER
+# syntax=docker/dockerfile:1.4@sha256:9ba7531bd80fb0a858632727cf7a112fbfd19b17e94c4e84ced81e24ef1a0dbc
+FROM node:20.11.1-bullseye@sha256:2056770f9050f845d41f0b025f966f2c49f0148d073ca65b110a2fbb4749774c AS BUILDER
 LABEL dockerfile.baseimage="node:20.11.1-bullseye" dockerfile.description="01_test_node20" dockerfile.stage="BUILDER"
 
 WORKDIR /scratch
@@ -22,7 +22,7 @@ RUN npm ci --only=production && npm cache clean --force
 # prune the node_modules
 RUN /usr/local/bin/node-prune --verbose ./node_modules
 
-FROM gcr.io/distroless/nodejs20-debian11:debug AS PRODUCTION
+FROM gcr.io/distroless/nodejs20-debian11:debug@sha256:565c9cca015cc2eae5d0ed9d1f52af60d26570123ac19445bff0a6ecfde65007 AS PRODUCTION
 LABEL dockerfile.baseimage="gcr.io/distroless/nodejs:20" dockerfile.description="01_test_node20" dockerfile.stage="PRODUCTION"
 
 ENV NODE_ENV production
