@@ -30,9 +30,22 @@ npx --yes --package renovate -- renovate-config-validator --strict
 
 
 ```sh
-export RENOVATE_TOKEN=$(gh auth token)
+ls $TMPDIR/renovate 
+rm -rf "$TMPDIR/renovate"
+
 export RENOVATE_CONFIG_FILE=./01_renovate_cli/renovate.json
+export RENOVATE_TOKEN=$(gh auth token)
 LOG_LEVEL=debug RENOVATE_PLATFORM=local renovate
+
+
+
+unset RENOVATE_CONFIG_FILE
+export RENOVATE_TOKEN=$(gh auth token)
+RENOVATE_CACHE=reset LOG_LEVEL=debug RENOVATE_PLATFORM=local renovate
+
+export RENOVATE_TOKEN=$(gh auth token)
+RENOVATE_PLATFORM=local RENOVATE_DRY_RUN=full RENOVATE_CACHE=reset RENOVATE_REINIT=true RENOVATE_PLATFORM=local LOG_LEVEL=debug renovate
+
 ```
 
 
