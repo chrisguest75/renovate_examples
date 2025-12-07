@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.4
+# syntax=docker/dockerfile:1.4@sha256:9ba7531bd80fb0a858632727cf7a112fbfd19b17e94c4e84ced81e24ef1a0dbc
 FROM cgr.dev/chainguard/node-lts:latest-dev AS BUILDER
 LABEL dockerfile.baseimage="cgr.dev/chainguard/node-lts:latest-dev" dockerfile.description="01_test_node20" dockerfile.stage="BUILDER"
 
