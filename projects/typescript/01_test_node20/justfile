@@ -53,7 +53,7 @@ build: install
   #npm run test
   npm run build
   npm run docker:build
-  npm run docker:run
+  #npm run docker:run
 
 
 build-all:
