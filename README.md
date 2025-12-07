@@ -2,6 +2,11 @@
 
 Demonstrate how to use renovate to identify packages for upgrade and fix them.  
 
+NOTES:
+
+* It's been a bit painful to setup.  
+* Each PR has a tickbox that when renovate is rerun it will rebase.
+
 ## Renovate
 
 Validate the configuration
