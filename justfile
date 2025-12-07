@@ -8,6 +8,13 @@ set dotenv-load := true
 default:
   @just -f {{ source_file() }} --list
 
+validate:
+  #!/usr/bin/env bash
+  set -eufo pipefail
+
+  npx --yes --package renovate -- renovate-config-validator --strict
+
+
 # ***************************************
 # scan
 # ***************************************
@@ -23,3 +30,5 @@ scan-local:
 
   unset RENOVATE_REPOSITORIES
   RENOVATE_PLATFORM=local npx --yes renovate
+
+

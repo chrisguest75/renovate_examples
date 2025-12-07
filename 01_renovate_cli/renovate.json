@@ -1,0 +1,69 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Central Renovate configuration for devcontainer_examples.",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits"
+  ],
+  "enabledManagers": [
+    "github-actions",
+    "npm",
+    "dockerfile",
+    "devcontainer"
+  ],
+  "includePaths": [
+    "01_renovate_cli/**",
+    "examples/**"
+  ],
+  "timezone": "UTC",
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 10,
+  "rebaseWhen": "conflicted",
+  "dependencyDashboardAutoclose": true,
+  "packageRules": [
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "labels": [
+        "dependencies",
+        "github-actions"
+      ]
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "npm dependencies",
+      "labels": [
+        "dependencies",
+        "npm"
+      ],
+      "minimumReleaseAge": "2 days"
+    },
+    {
+      "matchManagers": [
+        "dockerfile",
+        "devcontainer"
+      ],
+      "groupName": "container base images",
+      "labels": [
+        "dependencies",
+        "containers"
+      ],
+      "schedule": [
+        "after 1am on saturday"
+      ]
+    }
+  ]
+}

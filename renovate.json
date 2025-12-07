@@ -1,72 +1,34 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Central Renovate configuration for devcontainer_examples.",
   "extends": [
-    "config:recommended",
-    ":semanticCommits"
+    "config:base",
+    "security:openssf-scorecard"
   ],
-  "enabledManagers": [
-    "github-actions",
-    "npm",
-    "dockerfile",
-    "devcontainer"
-  ],
-  "ignorePaths": [
 
-  ],  
-  "includePaths": [
-    "01_renovate_cli/**",
-    "examples/**"
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+
+  "osvVulnerabilityAlerts": true,
+  "dependencyDashboardOSVVulnerabilitySummary": "all",
+  "addLabels": [
+    "renovate",
+    "{{{manager}}}"
   ],
-  "timezone": "UTC",
-  "prHourlyLimit": 2,
-  "prConcurrentLimit": 10,
-  "rebaseWhen": "conflicted",
-  "dependencyDashboardAutoclose": true,
   "packageRules": [
+
+  ],
+  "customManagers": [
     {
-      "matchManagers": [
-        "github-actions"
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)Dockerfile$",
+        "(^|/)Dockerfile$.*"
       ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
+      "matchStrings": [
+        "renovate: datasource=(?<datasource>.*?) depName=(?<depName>\\S*)( versioning=(?<versioning>.*?))?( extractVersion=(?<extractVersion>.*?))?\\nARG .*?_VERSION=(?<currentValue>.*)\\s"
       ],
-      "automerge": true,
-      "automergeType": "pr",
-      "labels": [
-        "dependencies",
-        "github-actions"
-      ]
-    },
-    {
-      "matchManagers": [
-        "npm"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "groupName": "npm dependencies",
-      "labels": [
-        "dependencies",
-        "npm"
-      ],
-      "minimumReleaseAge": "2 days"
-    },
-    {
-      "matchManagers": [
-        "dockerfile",
-        "devcontainer"
-      ],
-      "groupName": "container base images",
-      "labels": [
-        "dependencies",
-        "containers"
-      ],
-      "schedule": [
-        "after 1am on saturday"
-      ]
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+      "extractVersionTemplate": "{{#if (equals extractVersion 'true')}}^v(?<version>\\S+){{/if}}"
     }
   ]
 }
