@@ -11,6 +11,9 @@
     "dockerfile",
     "devcontainer"
   ],
+  "ignorePaths": [
+
+  ],  
   "includePaths": [
     "01_renovate_cli/**",
     "examples/**"
