@@ -24,6 +24,7 @@ renovate
 renovate --version
 
 export RENOVATE_TOKEN=$(gh auth token)
+echo "export RENOVATE_TOKEN=$(gh auth token)"
 renovate .
 ```
 
