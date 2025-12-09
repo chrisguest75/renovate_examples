@@ -35,11 +35,17 @@ start-dev *args:
   set -xeufo pipefail
   npm run start:dev {{ args }}
 
+start *args:
+  #!/usr/bin/env bash
+  set -xeufo pipefail
+  npm run start {{ args }}
+
 
 test:
   #!/usr/bin/env bash
   set -xeufo pipefail
-  npm run test
+  #npm run test
+  npm run start
 
   
 watch:

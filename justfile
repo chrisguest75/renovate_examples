@@ -54,3 +54,15 @@ build:
   just -f ./projects/typescript/01_test_node20/justfile build 
   just -f ./projects/typescript/08_pino_logger/justfile build 
 
+# ***************************************
+# test
+# ***************************************
+
+test:  
+  #!/usr/bin/env bash
+  set -eufo pipefail
+
+  just -f ./projects/dockerfiles/justfile test
+  just -f ./projects/typescript/01_test_node20/justfile test
+  just -f ./projects/typescript/08_pino_logger/justfile test 
+

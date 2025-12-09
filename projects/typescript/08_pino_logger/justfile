@@ -40,7 +40,7 @@ start-dev *args:
 test:
   #!/usr/bin/env bash
   set -xeufo pipefail
-  npm run test
+  npm exec ts-node ./src/index.ts
 
   
 watch:

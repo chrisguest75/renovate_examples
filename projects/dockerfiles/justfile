@@ -18,3 +18,13 @@ build:
 
   docker build -f Dockerfile.osv -t renovate_examples_osv:latest . 
   docker build -f Dockerfile.ubuntu -t renovate_examples_ubuntu:latest . 
+
+# ***************************************
+# test
+# ***************************************
+
+test:  
+  #!/usr/bin/env bash
+  set -eufo pipefail
+
+  echo "Skipping tests"
