@@ -1,4 +1,4 @@
-FROM ghcr.io/google/osv-scanner:v1.3.1@sha256:a276584fd30cf5a9b5e1603ce980527a5f1a6ff0a1a51c10d17354c0f9092911 as osv
+FROM ghcr.io/google/osv-scanner:v2.3.0@sha256:6421cdd773a54fad5fd991895b4f3840beba55a2f30a8182185919e13979a2c8 as osv
 
 FROM node:20-slim@sha256:1b38aaddff63cd0d3a9b5b03863a71fd33ee62047dd2e915f494d96b4b9c18cc
 
