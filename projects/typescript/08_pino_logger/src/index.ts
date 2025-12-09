@@ -3,7 +3,7 @@ import { logger } from "./logger";
 function secondary(log: typeof logger) {
     log.info("Enter secondary")
     
-    let array = [1,2,3,4]
+    const array = [1,2,3,4]
     array.forEach(value => {
         log.child({"value":value}).info("Looping in secondary")
     })
