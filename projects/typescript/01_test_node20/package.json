@@ -69,6 +69,6 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "minimist": "^1.2.8",
-    "pino": "^8.19.0"
+    "pino": "^10.0.0"
   }
 }
