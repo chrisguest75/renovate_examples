@@ -65,6 +65,16 @@ jobs:
           TEST_OUTPUT_FOLDER=$(pwd)/out/tests/junit
           mkdir -p ${TEST_OUTPUT_FOLDER}          
 
+    - name: Lint in DevContainer
+      uses: devcontainers/ci@v0.3
+      with:
+        imageName: ${{ steps.devcontainer-tag.outputs.image }}
+        cacheFrom: ghcr.io/${{ github.repository }}/devcontainer:latest
+        configFile: .devcontainer/21_renovate_amd64/devcontainer.json
+        runCmd: |
+          echo "=== Linting ==="
+          just lint
+
     - name: Build in DevContainer
       uses: devcontainers/ci@v0.3
       with:

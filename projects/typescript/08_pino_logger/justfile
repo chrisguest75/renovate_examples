@@ -29,7 +29,16 @@ install:
   nvm use
   npm install
 
+lint:
+  #!/usr/bin/env bash
+  set -eufo pipefail
 
+  just install
+
+  . ${NVM_DIR}/nvm.sh
+  nvm use
+  node --version  
+  npm run lint
 
 start-dev *args:
   #!/usr/bin/env bash

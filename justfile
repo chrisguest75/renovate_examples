@@ -55,6 +55,18 @@ install:
   just -f ./projects/typescript/08_pino_logger/justfile install
 
 # ***************************************
+# lint
+# ***************************************
+
+lint:  
+  #!/usr/bin/env bash
+  set -eufo pipefail
+
+  just -f ./projects/dockerfiles/justfile lint
+  just -f ./projects/typescript/01_test_node20/justfile lint
+  just -f ./projects/typescript/08_pino_logger/justfile lint
+
+# ***************************************
 # build
 # ***************************************
 
