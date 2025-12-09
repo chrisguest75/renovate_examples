@@ -47,4 +47,4 @@ test:
   #!/usr/bin/env bash
   set -eufo pipefail
 
-  echo "Skipping tests"
+  just build
