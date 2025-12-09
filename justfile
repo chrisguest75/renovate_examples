@@ -31,6 +31,18 @@ scan-local:
   RENOVATE_PLATFORM=local npx --yes renovate
 
 # ***************************************
+# install
+# ***************************************
+
+install:  
+  #!/usr/bin/env bash
+  set -eufo pipefail
+
+  just -f ./projects/dockerfiles/justfile install
+  just -f ./projects/typescript/01_test_node20/justfile install
+  just -f ./projects/typescript/08_pino_logger/justfile install
+
+# ***************************************
 # build
 # ***************************************
 

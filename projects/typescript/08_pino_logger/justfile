@@ -22,7 +22,13 @@ nix:
 install:
   #!/usr/bin/env bash
   set -xeufo pipefail
+
+  uv run --python 3.11 bash -c ". ${NVM_DIR}/nvm.sh && nvm install"
+  
+  . ${NVM_DIR}/nvm.sh
+  nvm use
   npm install
+
 
 
 start-dev *args:
@@ -42,13 +48,16 @@ watch:
   set -xeufo pipefail
   watchexec --exts ts npm run test
 
-build: install
+build: 
   #!/usr/bin/env bash
   set -eufo pipefail
 
-  . ${NVM_DIR}/nvm.sh && nvm install
-  nvm use
+  . ${NVM_DIR}/nvm.sh
 
+  just install
+  
+  . ${NVM_DIR}/nvm.sh
+  nvm use
   node --version
   #npm outdated
   #npm install
