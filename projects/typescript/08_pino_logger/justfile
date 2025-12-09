@@ -11,7 +11,7 @@ default:
 
 clean:
   rm -rf ./node_modules || true
-
+  rm -rf ./build || true
 
 nix:
   #!/usr/bin/env bash
@@ -21,7 +21,7 @@ nix:
 
 install:
   #!/usr/bin/env bash
-  set -xeufo pipefail
+  set -eufo pipefail
 
   uv run --python 3.11 bash -c ". ${NVM_DIR}/nvm.sh && nvm install"
   
@@ -41,6 +41,8 @@ test:
   #!/usr/bin/env bash
   set -eufo pipefail
 
+  just build
+
   . ${NVM_DIR}/nvm.sh
   nvm use
   node --version  
@@ -56,8 +58,6 @@ watch:
 build: 
   #!/usr/bin/env bash
   set -eufo pipefail
-
-  . ${NVM_DIR}/nvm.sh
 
   just install
   
