@@ -69,3 +69,12 @@ jobs:
           echo "=== Building ==="
           just build
 
+    - name: Test in DevContainer
+      uses: devcontainers/ci@v0.3
+      with:
+        imageName: ${{ steps.devcontainer-tag.outputs.image }}
+        cacheFrom: ghcr.io/${{ github.repository }}/devcontainer:latest
+        configFile: .devcontainer/21_renovate_amd64/devcontainer.json
+        runCmd: |
+          echo "=== Testing ==="
+          just test
