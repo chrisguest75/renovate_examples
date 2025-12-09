@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4@sha256:9ba7531bd80fb0a858632727cf7a112fbfd19b17e94c4e84ced81e24ef1a0dbc
-FROM node:20.11.1-bullseye@sha256:2056770f9050f845d41f0b025f966f2c49f0148d073ca65b110a2fbb4749774c AS BUILDER
+FROM node:20.19.6-bullseye@sha256:3bf1bf603e3e282c84c627e89a310b9bc9a9cb16871960bf11f522067c6a6014 AS BUILDER
 LABEL dockerfile.baseimage="node:20.11.1-bullseye" dockerfile.description="01_test_node20" dockerfile.stage="BUILDER"
 
 WORKDIR /scratch
