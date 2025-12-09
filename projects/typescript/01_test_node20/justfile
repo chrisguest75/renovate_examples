@@ -43,8 +43,12 @@ start *args:
 
 test:
   #!/usr/bin/env bash
-  set -xeufo pipefail
+  set -eufo pipefail
   #npm run test
+
+  . ${NVM_DIR}/nvm.sh
+  nvm use
+  node --version  
   npm run start
 
   

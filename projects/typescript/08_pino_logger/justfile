@@ -39,7 +39,12 @@ start-dev *args:
 
 test:
   #!/usr/bin/env bash
-  set -xeufo pipefail
+  set -eufo pipefail
+
+  . ${NVM_DIR}/nvm.sh
+  nvm use
+  node --version  
+
   npm exec ts-node ./src/index.ts
 
   
