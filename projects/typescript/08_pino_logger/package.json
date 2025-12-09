@@ -31,6 +31,6 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "pino": "^7.0.4"
+    "pino": "^10.0.0"
   }
 }
