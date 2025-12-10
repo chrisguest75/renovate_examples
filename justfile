@@ -42,6 +42,8 @@ clean:
   just -f ./projects/typescript/01_test_node20/justfile clean
   just -f ./projects/typescript/08_pino_logger/justfile clean
 
+  just -f ./projects/python/49_uv/justfile clean
+
 # ***************************************
 # install
 # ***************************************
@@ -53,6 +55,8 @@ install:
   just -f ./projects/dockerfiles/justfile install
   just -f ./projects/typescript/01_test_node20/justfile install
   just -f ./projects/typescript/08_pino_logger/justfile install
+
+  just -f ./projects/python/49_uv/justfile install
 
 # ***************************************
 # lint
@@ -66,6 +70,8 @@ lint:
   just -f ./projects/typescript/01_test_node20/justfile lint
   just -f ./projects/typescript/08_pino_logger/justfile lint
 
+  just -f ./projects/python/49_uv/justfile lint
+
 # ***************************************
 # build
 # ***************************************
@@ -77,6 +83,8 @@ build:
   just -f ./projects/dockerfiles/justfile build 
   just -f ./projects/typescript/01_test_node20/justfile build 
   just -f ./projects/typescript/08_pino_logger/justfile build 
+
+  just -f ./projects/python/49_uv/justfile build
 
 # ***************************************
 # test
@@ -90,3 +98,4 @@ test:
   just -f ./projects/typescript/01_test_node20/justfile test
   just -f ./projects/typescript/08_pino_logger/justfile test 
 
+  just -f ./projects/python/49_uv/justfile test

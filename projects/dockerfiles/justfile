@@ -13,10 +13,14 @@ default:
 # ***************************************
 
 clean:  
-  #!/usr/bin/env bash
-  set -eufo pipefail
-
   echo "Skipping clean"
+
+# ***************************************
+# install
+# ***************************************
+
+install:  
+  echo "Skipping install"
 
 # ***************************************
 # lint

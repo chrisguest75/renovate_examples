@@ -16,6 +16,9 @@ init:
   set -xeufo pipefail
   uv init .
 
+install:  
+  echo "Skipping install"
+
 start *args:
   #!/usr/bin/env bash
   set -eufo pipefail
@@ -34,6 +37,11 @@ lint:
 format:
   #!/usr/bin/env bash
   uv run black --line-length=120 .
+
+build application="$DEFAULT_APPLICATION": 
+  #!/usr/bin/env bash
+  set -xeufo pipefail  
+  just docker-build {{ application }}
 
 # build docker image 
 docker-build application="$DEFAULT_APPLICATION": 

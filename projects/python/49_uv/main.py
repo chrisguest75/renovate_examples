@@ -48,7 +48,7 @@ def str2bool(value: str) -> bool:
 def test() -> int:
     """test function"""
     logger = logging.getLogger()
-    test_config = os.environ["TEST_CONFIG"]
+    test_config = os.environ["TEST_CONFIG"] if "TEST_CONFIG" in os.environ else "default_value"
     logger.info(f"Invoked test function - TEST_CONFIG={test_config!r}")
     logger.info(f"details={details()}")
 
