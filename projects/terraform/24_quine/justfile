@@ -1,0 +1,17 @@
+set dotenv-load := true
+
+export DEFAULT_APPLICATION:="uv"
+
+# default lists actions
+default:
+  @just -f justfile --list
+
+clean:
+  rm -rf ./.terraform_state || true
+
+install:
+  #!/usr/bin/env bash
+  set -xeufo pipefail
+  tfenv use
+  terraform init
+

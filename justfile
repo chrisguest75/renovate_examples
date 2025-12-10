@@ -34,68 +34,47 @@ scan-local:
 # clean
 # ***************************************
 
-clean:  
+execute-task action="":  
   #!/usr/bin/env bash
   set -eufo pipefail
 
-  just -f ./projects/dockerfiles/justfile clean
-  just -f ./projects/typescript/01_test_node20/justfile clean
-  just -f ./projects/typescript/08_pino_logger/justfile clean
+  echo "****************************************"
+  echo "Executing '{{ action }}' on dockerfiles"
+  echo "****************************************"
+  just -f ./projects/dockerfiles/justfile {{ action }}
+  echo "****************************************"
+  echo "Executing '{{ action }}' on 01_test_node20"
+  echo "****************************************"
+  just -f ./projects/typescript/01_test_node20/justfile {{ action }}
+  echo "****************************************"
+  echo "Executing '{{ action }}' on 08_pino_logger"
+  echo "****************************************"
+  just -f ./projects/typescript/08_pino_logger/justfile {{ action }}
 
-  just -f ./projects/python/49_uv/justfile clean
+  echo "****************************************"
+  echo "Executing '{{ action }}' on 49_uv"
+  echo "****************************************"
+  just -f ./projects/python/49_uv/justfile {{ action }}
+  echo "****************************************"
+  echo "Executing '{{ action }}' on 24_quine"
+  echo "****************************************"
+  just -f ./projects/terraform/24_quine/justfile {{ action }}
 
-# ***************************************
-# install
-# ***************************************
+
+clean:  
+  just execute-task clean
 
 install:  
-  #!/usr/bin/env bash
-  set -eufo pipefail
-
-  just -f ./projects/dockerfiles/justfile install
-  just -f ./projects/typescript/01_test_node20/justfile install
-  just -f ./projects/typescript/08_pino_logger/justfile install
-
-  just -f ./projects/python/49_uv/justfile install
-
-# ***************************************
-# lint
-# ***************************************
+  just execute-task install
 
 lint:  
-  #!/usr/bin/env bash
-  set -eufo pipefail
-
-  just -f ./projects/dockerfiles/justfile lint
-  just -f ./projects/typescript/01_test_node20/justfile lint
-  just -f ./projects/typescript/08_pino_logger/justfile lint
-
-  just -f ./projects/python/49_uv/justfile lint
-
-# ***************************************
-# build
-# ***************************************
+  just execute-task lint
 
 build:  
-  #!/usr/bin/env bash
-  set -eufo pipefail
-
-  just -f ./projects/dockerfiles/justfile build 
-  just -f ./projects/typescript/01_test_node20/justfile build 
-  just -f ./projects/typescript/08_pino_logger/justfile build 
-
-  just -f ./projects/python/49_uv/justfile build
-
-# ***************************************
-# test
-# ***************************************
+  just execute-task build
 
 test:  
-  #!/usr/bin/env bash
-  set -eufo pipefail
+  just execute-task test
 
-  just -f ./projects/dockerfiles/justfile test
-  just -f ./projects/typescript/01_test_node20/justfile test
-  just -f ./projects/typescript/08_pino_logger/justfile test 
 
-  just -f ./projects/python/49_uv/justfile test
+  

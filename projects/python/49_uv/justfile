@@ -6,6 +6,11 @@ export DEFAULT_APPLICATION:="uv"
 default:
   @just -f justfile --list
 
+clean:
+  rm -rf ./__pycache__ || true
+  rm -rf ./.venv || true
+  rm -rf ./.pytest_cache || true
+
 nix:
   #!/usr/bin/env bash
   set -xeufo pipefail
