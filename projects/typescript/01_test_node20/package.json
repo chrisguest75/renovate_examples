@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "tsc": "tsc",    
+    "tsc": "tsc",
     "audit": "better-npm-audit audit",
     "audit:production": "better-npm-audit audit --production",
     "clean": "rimraf build",
@@ -52,7 +52,7 @@
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.0",
     "typedoc-plugin-mermaid": "^1.12.0",
-    "typedoc-plugin-missing-exports": "^3.0.0",
+    "typedoc-plugin-missing-exports": "^4.1.2",
     "typescript": "^5.4.3"
   },
   "nodemonConfig": {
