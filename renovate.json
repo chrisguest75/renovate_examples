@@ -2,8 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    "security:openssf-scorecard",
-    "helpers:pinGitHubActionDigests"
+    "security:openssf-scorecard"
   ],
 
   "prConcurrentLimit": 0,
@@ -18,7 +17,8 @@
   "packageRules": [
     {
       "matchManagers": [
-        "dockerfile"
+        "dockerfile",
+        "github-actions"
       ],
       "pinDigests": true
     }
