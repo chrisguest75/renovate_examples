@@ -15,6 +15,12 @@ install:
   tfenv use
   terraform init
 
+lint:
+  #!/usr/bin/env bash
+  set -xeufo pipefail
+  tfenv use
+  terraform fmt
+
 test:
   #!/usr/bin/env bash
   set -xeufo pipefail
