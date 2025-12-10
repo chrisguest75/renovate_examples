@@ -11,24 +11,24 @@ clean:
 
 install:
   #!/usr/bin/env bash
-  set -xeufo pipefail
+  set -eufo pipefail
   tfenv use
   terraform init
 
 lint:
   #!/usr/bin/env bash
-  set -xeufo pipefail
+  set -eufo pipefail
   tfenv use
   terraform fmt
 
-test:
+test: install
   #!/usr/bin/env bash
-  set -xeufo pipefail
+  set -eufo pipefail
   tfenv use
   #terraform plan
 
-build:
+build: install
   #!/usr/bin/env bash
-  set -xeufo pipefail
+  set -eufo pipefail
   tfenv use
   terraform plan
