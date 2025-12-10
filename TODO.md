@@ -1,6 +1,7 @@
 # TODO
 
 * Lock down actions.
+* cpp
 * Docker image checking
 * Devcontainer checking
 * Setup a pipeline
